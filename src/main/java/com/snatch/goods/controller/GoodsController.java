@@ -1,18 +1,16 @@
 package com.snatch.goods.controller;
 
-import com.snatch.goods.service.GoodsService;
-import com.snatch.goods.util.ApiResult;
 import com.snatch.goods.entity.BuyProductReq;
+import com.snatch.goods.service.GoodsService;
 import com.snatch.goods.service.ProducerService;
+import com.snatch.goods.util.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 /**
  * @author fanglingxiao
- * @createTime 2019/1/16
+ * @date 2019/1/16
  */
 @Controller
 @RequestMapping("/goods")
@@ -27,7 +25,7 @@ public class GoodsController {
 
     @RequestMapping("test")
     public String test(){
-        //producerService.send();
+        producerService.send();
         return "buyproduct";
     }
 
