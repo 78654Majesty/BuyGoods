@@ -1,6 +1,8 @@
 buildscript {
     ext {
         springBootVersion = '2.1.2.RELEASE'
+        //SpringCloud version
+        springCloudVersion = 'Greenwich.RELEASE'
     }
     repositories {
 //        mavenCentral()
@@ -30,6 +32,7 @@ sourceCompatibility = '1.8'
 repositories {
 //    mavenCentral()
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
@@ -53,11 +56,21 @@ dependencies {
     implementation group: 'com.xuxueli', name: 'xxl-job-core', version: '2.0.1'
     //时区转换工具包
     implementation group: 'joda-time', name: 'joda-time', version: '2.10.1'
+    //eureka
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: '2.1.0.RELEASE'
+    // okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.12.1'
 
     runtimeOnly 'mysql:mysql-connector-java'
     compileOnly 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 configurations {
