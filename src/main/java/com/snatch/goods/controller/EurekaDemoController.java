@@ -4,10 +4,7 @@ import com.snatch.goods.entity.User;
 import com.snatch.goods.service.EurekaDemoService;
 import com.snatch.goods.util.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author fanglingxiao
@@ -22,6 +19,7 @@ public class EurekaDemoController {
     private EurekaDemoService eurekaDemoService;
 
     @GetMapping("/{id}")
+    @ResponseBody
     public ApiResult<User> getUser(@PathVariable("id")Integer id){
         User user = eurekaDemoService.getUserById(id);
         return getResResult(user);

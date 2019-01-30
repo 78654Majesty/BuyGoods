@@ -1,5 +1,7 @@
 package com.snatch.goods.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class User {
@@ -15,10 +17,13 @@ public class User {
 
     private Integer sex;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date creatTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String note;

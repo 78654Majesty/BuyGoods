@@ -1,5 +1,6 @@
 package com.snatch.goods.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.snatch.goods.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ import java.util.List;
 
 /**
  * @author fanglingxiao
- * @date  2019/1/26
+ * @date 2019/1/26
  */
 @Service
 public class EurekaDemoService {
@@ -26,26 +27,30 @@ public class EurekaDemoService {
 
     private static final Logger logger = LoggerFactory.getLogger(EurekaDemoService.class);
 
-    private static final String MALL_SERVER="mall-server";
+    private static final String MALL_SERVER = "mall-server";
 
     /**
-     *
      * @param id id
      * @return User
      */
-    public User getUserById(Integer id){
+    public User getUserById(Integer id) {
 
-        String serverUrl =  getServerUrl();
-        return restTemplate.getForObject(serverUrl + id, User.class);
+        String serverUrl = getServerUrl();
+        /**
+         * 由于时间传输的问题 默认json时间传递格式不支持
+         * yyyy-MM-dd HH:mm:ss 所以用JsonObject接收再做转换
+         */
+        JSONObject forObject = restTemplate.getForObject(serverUrl + id, JSONObject.class);
+        return JSONObject.toJavaObject(forObject, User.class);
     }
 
     private String getServerUrl() {
         List<ServiceInstance> instances = discoveryClient.getInstances(EurekaDemoService.MALL_SERVER);
 
         ServiceInstance serviceInstance = instances.get(0);
-        String serverUrl = "http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+"/user/";
+        String serverUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/";
 
-        logger.info("server url is {}",serverUrl);
+        logger.info("server url is {}", serverUrl);
         return serverUrl;
     }
 }
