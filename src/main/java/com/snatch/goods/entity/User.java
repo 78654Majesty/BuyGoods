@@ -17,7 +17,7 @@ public class User {
 
     private Integer sex;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
